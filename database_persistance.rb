@@ -48,10 +48,6 @@ class DatabasePersistance
     query(delete_list, list_id)
   end
 
-  def has_list?(name)
-  #   @session[:lists].any? { |list| list[:name] == name }
-  end
-
   def update_list_name(list_id, list_name)
     statement = "UPDATE lists SET name = $1 WHERE id = $2"
     query(statement, list_name, list_id)
@@ -75,13 +71,6 @@ class DatabasePersistance
   def mark_all_todos_complete(list_id)
     statement = "UPDATE todos SET completed = true WHERE list_id = $1"
     query(statement, list_id)
-  end
-
-  # private
-
-  def next_element_id(elements)
-  #   max = elements.map { |todo| todo[:id] }.max || 0
-  #   max + 1
   end
 
   private
