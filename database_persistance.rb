@@ -73,6 +73,10 @@ class DatabasePersistance
     query(statement, list_id)
   end
 
+  def has_list?(list_name)
+    all_lists.any? { |list| list[:name] == list_name }
+  end
+
   private
 
   def populate_todos(list_id)

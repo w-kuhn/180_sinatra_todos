@@ -114,21 +114,22 @@ end
 # View a single todo list
 get "/lists/:id" do
   @list_id = params[:id].to_i
-  @list = load_list(@list_id)
+  @list = @storage.find_list(@list_id)
   erb :list, layout: :layout
 end
 
 # Edit an existing todo list
 get "/lists/:id/edit" do
   id = params[:id].to_i
-  @list = load_list(id)
+  @list = @storage.find_list(id)
   erb :edit_list, layout: :layout
 end
 
 # Update an existing todo list
 post "/lists/:id" do
-  list_name = params[:list_name].strip
   id = params[:id].to_i
+  @list = @storage.find_list(id)
+  list_name = params[:list_name].strip
 
   error = error_for_list_name(list_name)
   if error
